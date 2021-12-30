@@ -54,36 +54,36 @@ if [ -f $DBLIST ]; then
 	cat $DBLIST | sed 's/^[ \t]*//;s/[ \t]*$//' | while read DB; do
 		DBNAME=`echo $DB | awk '{print $1}'`
 		if [ $DBNAME == '<db-name>' ]; then
-                RMSQLUSER="<username/password>@<TNSNAMES_ID>"
-    else
-                RMSQLUSER="<username/password>@${DBNAME}_TNSNAMES_ID"
-    fi
-    SQL_OUT=`sqlplus -S /nolog<<EOF
-             connect $RMSQLUSER
-             set feedback off
-             set echo off
-             set pages 0
-             set lines 1000
-             spool /tmp/oracle_datafile_list.txt
-             select TO_CHAR(df.creation_time, 'DD-MON-YYYY,HH24:MI:SS'), ts.name ts_name, df.name df_name from v\\$datafile df, v\\$tablespace ts where df.ts#=ts.ts# union select TO_CHAR(tmp.creation_time, 'DD-MON-YYYY,HH24:MI:SS'), ts.name ts_name, tmp.name df_name from v\\$tempfile tmp, v\\$tablespace ts where tmp.ts#=ts.ts# order by 2,1,3;
-             spool off;
-             exit;
+                	RMSQLUSER="<username/password>@<TNSNAMES_ID>"
+    		else
+                	RMSQLUSER="<username/password>@${DBNAME}_TNSNAMES_ID"
+    		fi
+   		SQL_OUT=`sqlplus -S /nolog<<EOF
+             		connect $RMSQLUSER
+             		set feedback off
+             		set echo off
+             		set pages 0
+             		set lines 1000
+             		spool /tmp/oracle_datafile_list.txt
+             		select TO_CHAR(df.creation_time, 'DD-MON-YYYY,HH24:MI:SS'), ts.name ts_name, df.name df_name from v\\$datafile df, v\\$tablespace ts where df.ts#=ts.ts# union select TO_CHAR(tmp.creation_time, 'DD-MON-YYYY,HH24:MI:SS'), ts.name ts_name, tmp.name df_name from v\\$tempfile tmp, v\\$tablespace ts where tmp.ts#=ts.ts# order by 2,1,3;
+             		spool off;
+             		exit;
 EOF
 `
-   if [ -f /tmp/oracle_datafile_list.txt ]; then
-                cat /tmp/oracle_datafile_list.txt | while read DBDF; do
-				                  TS_NAME=`echo $DBDF | awk '{print $2}'`
-                          DF_NAME=`echo $DBDF | awk '{print $3}'| xargs`
-                          CR8TION=`echo $DBDF | awk '{print $1}'| sed 's/,/ /g'`
-                          SQL_OUT=`sqlplus -S /nolog<<EOF
-                                  connect $SQLUSER
-                                  delete from oracle_datafiles where DB_NAME='$DBNAME' and DF_NAME='$DF_NAME';
-                                  insert into oracle_datafiles VALUES ('$DBNAME', '$TS_NAME', '$DF_NAME', TO_DATE('$CR8TION', 'DD-MON-YYYY HH24:MI:SS'));
-                                  commit;
-                                  exit;
+   		if [ -f /tmp/oracle_datafile_list.txt ]; then
+                	cat /tmp/oracle_datafile_list.txt | while read DBDF; do
+		        	TS_NAME=`echo $DBDF | awk '{print $2}'`
+                          	DF_NAME=`echo $DBDF | awk '{print $3}'| xargs`
+                          	CR8TION=`echo $DBDF | awk '{print $1}'| sed 's/,/ /g'`
+                          	SQL_OUT=`sqlplus -S /nolog<<EOF
+                                  	connect $SQLUSER
+                                  	delete from oracle_datafiles where DB_NAME='$DBNAME' and DF_NAME='$DF_NAME';
+                                  	insert into oracle_datafiles VALUES ('$DBNAME', '$TS_NAME', '$DF_NAME', TO_DATE('$CR8TION', 'DD-MON-YYYY HH24:MI:SS'));
+                                  	commit;
+                                  	exit;
 EOF
 `
-                done
+                	done
                 fi
                 SQL_OUT=`sqlplus -S /nolog<<EOF
                 	connect $RMSQLUSER
@@ -99,7 +99,7 @@ EOF
 `
                 if [ -f /tmp/oracle_tbsp_list.txt ]; then
                         cat /tmp/oracle_tbsp_list.txt | while read TBSP; do
-                        	      TBNAME=`echo $TBSP | awk '{print $1}'`
+                        	TBNAME=`echo $TBSP | awk '{print $1}'`
                                 TOTSIZE=`echo $TBSP | awk '{print $2}'`
                                 USEDSIZE=`echo $TBSP | awk '{print $4}'`
                                 PERCUSED=`echo $TBSP | awk '{print $3}'`
