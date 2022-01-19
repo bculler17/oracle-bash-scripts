@@ -7,5 +7,5 @@ create table ORACLE_DB_WORKLOAD_TREND (
   AVG_HOURLY_READONLY VARCHAR2(50)
   );
   -- where AVG_HOURLY_TOT_USER CALLS = the average number of both DML and select statements executed each hour
-  -- AVG_HOURLY_DML_TX = the average number of only DML statements executed each hour (insert, update, deletes)
+  -- AVG_HOURLY_DML_TX = the average number of 'User Commits' and 'User Rollbacks' executed each hour 
   -- AVG_HOURLY_READONLY = the average number of select statements executed each hour 
