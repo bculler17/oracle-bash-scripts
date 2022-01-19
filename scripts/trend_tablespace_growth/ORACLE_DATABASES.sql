@@ -31,8 +31,8 @@ create table ORACLE_DATABASES(
 -- max_db_files = will be autopopulated by my it_reaches_out.sh script (the maximum number of datafiles the database is configured to use. The database will not be able to expand anymore once this parameter is reached. total_db_files will show us how close we are to reaching max_db_files)
 -- node1 = the hostname of the database server that the first database instance resides on
 -- node2 = the hostname of the database server that the second database instance resides on
--- up_time1 = will be autopopulated by my it_reaches_out.sh script (the uptime of the first database server - node1)
--- up_time2 = will be autopopulated by my it_reaches_out.sh script (the uptime of the second database server - node2)
+-- up_time1 = will be autopopulated by my it_reaches_out.sh script (the number of days the first database instance has been online)
+-- up_time2 = will be autopopulated by my it_reaches_out.sh script (the number of days the second database instance has been online)
 -- status = determines if the database is still in use ('ACTIVE'), has been decommissioned ('INACTIVE'), or if it is a test environment ('TEST')
 -- online_status = will be autopopulated by my it_reaches_out.sh script ('YES' = the database is online, 'NO' = the database is not online)
 -- alert_status = determines if my it_reaches_out.sh script will email alerts if the database is offline ('YES' = emails will be sent, 'NO' = you will not be alerted/emailed if the database is down)
