@@ -2,7 +2,7 @@
 #
 # ----------------------------------------------------------------------------------------------------------------------------------
 # This script performs Audit Trail maintenance for an 11g database.
-# Use for 11g RAC environments with 2+ nodes and an NFS mounted file system is located on node 1 (schedule to run this script from node 1), or for One Node RAC environments, or for Standalone Databases.
+# Use for 11g RAC environments with 1-2 nodes and an NFS mounted file system that is located on node 1 (schedule to run this script from node 1).
 # Scheduling this script to run daily for each DB will keep a 45 day rolling window of data in the aud$ table, a rolling 1.5 year's worth of data in the audit archive table, a rolling 15 day window in the ASM and DB AUDIT_FILE_DEST on the OS on each node in the cluster, and a rolling 1.5 year's worth of AUDIT_FILE_DEST archives.
 # Audit records older than 45 days will first be archived into an archive table before being purged from the aud$ table.
 # ASM and DB AUDIT_FILE_DEST OS files that are older than 15 days are archived to a zip file on an NFS mounted FS and then deleted from the AUDIT_FILE_DEST
