@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# To execute this script, three database tables will need to already exist in an Oracle database: oracle_databases, oracle_tablespaces, and oracle_datafiles
+# To execute this script, four database tables will need to already exist in an Oracle database: oracle_servers, oracle_databases, oracle_tablespaces, and oracle_datafiles
 # oracle_databases records all of the databases needing to be managed and monitored remotely with this script
 #
 # Goal 1 of this script: The size of every tablespace in each database recorded in the oracle_databases table with status='ACTIVE' will be automatically checked twice a day by scheduling this script in crontab 
