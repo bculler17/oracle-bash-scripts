@@ -63,10 +63,10 @@ while [ $START == 'BEGIN' ]; do
 done
 START=BEGIN	
 while [ $START == 'BEGIN' ]; do
-	echo "Would you like to push these files to ~/chsdba/common? Y/N"
+	echo "Would you like to push these files to ~/standard/location? Y/N"
 	read ANSWER
 	if [ $ANSWER == 'Y' ]; then
-		export REMOTE_DEST='~/chsdba/common'	# push file to this location on the remote servers
+		export REMOTE_DEST='~/standard/location'	# push file to this location on the remote servers
 		START=FINISHED
                 echo " "
 	elif [ $ANSWER == 'N' ]; then
