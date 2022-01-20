@@ -108,7 +108,7 @@ SQL_OUT=`sqlplus -S /nolog<<EOF
          col node1 format a25
          col node2 format a25
          spool /tmp/oracle_pushlist.txt
-         select distinct IPADDRESS, hostname from oracle_servers s, oracle_databases d where (s.hostname=d.node1 or s.hostname=d.node2) and s.status='ACTIVE' and s.function in (${TYPE}) and d.status!='HMA' order by 2;
+         select distinct IPADDRESS, hostname from oracle_servers s, oracle_databases d where (s.hostname=d.node1 or s.hostname=d.node2) and s.status='ACTIVE' and s.function in (${TYPE}) order by 2;
          spool off;
          exit;
 EOF
