@@ -1,26 +1,26 @@
 create table ORACLE_DATABASES(
-	  ID NUMBER,
+	ID NUMBER,
   	APPLICATION_NAME VARCHAR2(150), 
-	  NAME VARCHAR2(10) not null,
-	  DBTYPE VARCHAR2(35),
+	NAME VARCHAR2(10) not null,
+	DBTYPE VARCHAR2(35),
   	VERSION VARCHAR2(50),
   	CURRENT_SIZE VARCHAR2(1000),
   	TOTAL_DB_FILES NUMBER,
   	MAX_DB_FILES NUMBER,
-	  NODE1 VARCHAR2(35) not null,
-	  NODE2 VARCHAR2(35) not null default 'N/A',
+	NODE1 VARCHAR2(35) not null,
+	NODE2 VARCHAR2(35) not null default 'N/A',
   	UP_TIME1 VARCHAR2(35);
   	UP_TIME2 VARCHAR2(35);
   	STATUS VARCHAR2(10) not null CHECK (status='ACTIVE' OR status='INACTIVE' OR status='TEST'),
   	ONLINE_STATUS VARCHAR2(10),
   	ALERT_STATUS VARCHAR2(10) CHECK (alert_status='YES' OR alert_status='NO'),
-	  RECORD_CREATED DATE default SYSDATE,
-	  RECORD_CREATOR VARCHAR2(25) not null,
-	  RECORD_UPDATED DATE,
-	  RECORD_UPDATED_BY VARCHAR2(1000),
-	  constraint oracle_databases_PK PRIMARY KEY(id),
-	  constraint oracle_databases_FK1 FOREIGN KEY(node1) REFERENCES oracle_servers(hostname),
-	  constraint oracle_databases_FK2 FOREIGN KEY(node2) REFERENCES oracle_servers(hostname)
+	RECORD_CREATED DATE default SYSDATE,
+	RECORD_CREATOR VARCHAR2(25) not null,
+	RECORD_UPDATED DATE,
+ 	RECORD_UPDATED_BY VARCHAR2(1000),
+	constraint oracle_databases_PK PRIMARY KEY(id),
+	constraint oracle_databases_FK1 FOREIGN KEY(node1) REFERENCES oracle_servers(hostname),
+	constraint oracle_databases_FK2 FOREIGN KEY(node2) REFERENCES oracle_servers(hostname)
 );
 -- WHERE application_name = the name of the application that this database supports
 -- name = the name of the database
